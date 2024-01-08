@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "builders-jetpack",
+  "version": "${version}",
+  "name": "BuildersJetpack",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/sticky/BuildersJetpack"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/builders_jetpack/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "io.github.mrstickypiston.buildersjetpack.client.BuildersJetpackClient"
+    ],
+    "main": [
+      "io.github.mrstickypiston.buildersjetpack.BuildersJetpack"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

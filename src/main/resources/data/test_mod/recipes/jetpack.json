@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "BCB",
+    "R R"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:netherite_chestplate"
+    },
+    "B": {
+      "item": "minecraft:copper_block"
+    },
+    "R": {
+      "item": "minecraft:firework_rocket"
+    },
+    "I": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "result": {
+    "item": "builders_jetpack:jetpack"
+  }
+}
