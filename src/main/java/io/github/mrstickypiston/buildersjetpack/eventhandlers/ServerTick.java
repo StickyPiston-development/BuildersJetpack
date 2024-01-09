@@ -6,11 +6,8 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtList;
-import net.minecraft.nbt.NbtString;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
@@ -37,7 +34,7 @@ public class ServerTick {
             ItemStack chestplate = player.getEquippedStack(EquipmentSlot.CHEST);
 
             if (chestplate.getItem() == RegisterItems.JETPACK_CHESTPLATE && player.interactionManager.getGameMode() != GameMode.SPECTATOR){
-                player.sendMessage(new LiteralText(String.format("Jetpack fuel: %.02f%%", getFuel(chestplate)/maxFuel*100)), true);
+                player.sendMessage(Text.of(String.format("Jetpack fuel: %.02f%%", getFuel(chestplate)/maxFuel*100)), true);
             }
 
             // Check for situations without jetpack
