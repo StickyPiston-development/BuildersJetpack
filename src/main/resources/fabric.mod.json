@@ -3,10 +3,10 @@
   "id": "builders-jetpack",
   "version": "${version}",
   "name": "Builders Jetpack",
-  "description": "",
-  "authors": [],
+  "description": "The ideal jetpack mod for builders.",
+  "authors": ["MrStickyPiston"],
   "contact": {
-    "repo": "https://github.com/sticky/BuildersJetpack"
+    "repo": "https://github.com/StickyPiston-development/BuildersJetpack"
   },
   "license": "All-Rights-Reserved",
   "icon": "assets/builders_jetpack/icon.png",
