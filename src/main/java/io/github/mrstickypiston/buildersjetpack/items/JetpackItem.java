@@ -1,5 +1,6 @@
 package io.github.mrstickypiston.buildersjetpack.items;
 
+import io.github.mrstickypiston.buildersjetpack.BuildersJetpack;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
@@ -12,8 +13,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class JetpackItem extends ArmorItem {
-
-    int maxFuel = 1000;
     float fuel;
 
     public JetpackItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
@@ -23,7 +22,7 @@ public class JetpackItem extends ArmorItem {
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         fuel = stack.getOrCreateNbt().getFloat("fuel");
 
-        tooltip.add(Text.of("Allows you to fly consuming 0.1 fuel/s"));
-        tooltip.add(Text.of(String.format("Fuel:  %.02f/%d (%.02f%%)", fuel, maxFuel, fuel / maxFuel * 100)));
+        tooltip.add(Text.of("Allows you to fly consuming fuel"));
+        tooltip.add(Text.of(String.format("Fuel:  %.02f/%d (%.02f%%)", fuel, BuildersJetpack.CONFIG.MAX_FUEL, fuel / BuildersJetpack.CONFIG.MAX_FUEL * 100)));
     }
 }

@@ -6,10 +6,11 @@
   "description": "The ideal jetpack mod for builders.",
   "authors": ["MrStickyPiston"],
   "contact": {
-    "repo": "https://github.com/StickyPiston-development/BuildersJetpack"
+    "issues": "https://github.com/StickyPiston-development/BuildersJetpack/issues",
+    "sources": "https://github.com/StickyPiston-development/BuildersJetpack"
   },
   "license": "All-Rights-Reserved",
-  "icon": "assets/builders_jetpack/icon.png",
+  "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
@@ -22,6 +23,7 @@
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
-    "minecraft": "${minecraft_version}"
+    "minecraft": "${minecraft_version}",
+    "configuration": "${configuration_version}"
   }
 }

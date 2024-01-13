@@ -1,12 +1,13 @@
 package io.github.mrstickypiston.buildersjetpack.items;
 
+import io.github.mrstickypiston.buildersjetpack.BuildersJetpack;
 import io.github.mrstickypiston.buildersjetpack.RegisterItems;
+import io.github.mrstickypiston.buildersjetpack.Utils;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -32,11 +33,11 @@ public class JetpackFuelItem extends Item {
             if (chestplate.getItem() != RegisterItems.JETPACK_CHESTPLATE){
                 return TypedActionResult.fail(stack);
 
-            } else if (fuel >= 1000){
+            } else if (fuel >= BuildersJetpack.CONFIG.MAX_FUEL){
                 return TypedActionResult.fail(stack);
             }
 
-            player.playSound(SoundEvents.ITEM_BUCKET_FILL_LAVA, 1, 1);
+            player.playSound(Utils.parseSoundEvent(BuildersJetpack.CONFIG.FUEL_ITEM_SUCCESS), 1, 1);
             return TypedActionResult.success(stack);
 
         }
@@ -45,15 +46,15 @@ public class JetpackFuelItem extends Item {
             player.sendMessage(Text.of("[§c§lBuilders jetpack§r] No jetpack equipped"), false);
             return TypedActionResult.fail(stack);
 
-        } else if (fuel >= 1000){
+        } else if (fuel >= BuildersJetpack.CONFIG.MAX_FUEL){
             player.sendMessage(Text.of("[§c§lBuilders jetpack§r] Jetpack fuel is already full"), false);
             return TypedActionResult.fail(stack);
         }
 
-        fuel += 60;
+        fuel += BuildersJetpack.CONFIG.FUEL_ITEM_AMOUNT;
 
-        if (fuel > 1000){
-            fuel = 1000;
+        if (fuel > BuildersJetpack.CONFIG.MAX_FUEL){
+            fuel = BuildersJetpack.CONFIG.MAX_FUEL;
         }
 
         chestplate.getOrCreateNbt().putFloat("fuel", fuel);
@@ -64,6 +65,6 @@ public class JetpackFuelItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.of("Adds 60 fuel to a backpack"));
+        tooltip.add(Text.of(String.format("Adds %d fuel to the equipped jetpack", BuildersJetpack.CONFIG.FUEL_ITEM_AMOUNT)));
     }
 }
