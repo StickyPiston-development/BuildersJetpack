@@ -80,6 +80,10 @@ public class ServerTick {
 
         movementMap.put(player.getUuid(), currentPosition);
 
+        if (distance > BuildersJetpack.CONFIG.FUEL_SPEED_CAP){
+            distance = BuildersJetpack.CONFIG.FUEL_SPEED_CAP;
+        }
+
         float fuel = nbt.getFloat("fuel") - BuildersJetpack.CONFIG.FLY_BASE_FUEL_COST - (float) distance/BuildersJetpack.CONFIG.FLY_MOVEMENT_FUEL_COST;
 
         if (BuildersJetpack.CONFIG.FUEL_WARNING) {

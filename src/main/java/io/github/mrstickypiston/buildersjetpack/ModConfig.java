@@ -46,4 +46,9 @@ public class ModConfig {
     @Configurable.Comment("The amount of fuel the fuel item adds to the jetpack")
     @Configurable.Range(min=0)
     public int FUEL_ITEM_AMOUNT = 100;
+
+    @Configurable
+    @Configurable.Comment("The amount of speed the fuel cost will be capped")
+    @Configurable.DecimalRange(min=0)
+    public float FUEL_SPEED_CAP = 1.4F;
 }
