@@ -28,6 +28,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     modImplementation "dev.toma.configuration:configuration-fabric-${project.minecraft_version}:${project.configuration_version}"
+    include "dev.toma.configuration:configuration-fabric-${project.minecraft_version}:${project.configuration_version}"
 }
 
 processResources {
