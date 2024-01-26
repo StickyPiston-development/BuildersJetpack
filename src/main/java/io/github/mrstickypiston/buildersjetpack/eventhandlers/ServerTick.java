@@ -31,10 +31,6 @@ public class ServerTick {
 
             ItemStack chestplate = player.getEquippedStack(EquipmentSlot.CHEST);
 
-            if (chestplate.getItem() == RegisterItems.JETPACK_CHESTPLATE && player.interactionManager.getGameMode() != GameMode.SPECTATOR){
-                player.sendMessage(Text.of(String.format("Jetpack fuel: %.02f%%", getFuel(chestplate)/(float) BuildersJetpack.CONFIG.MAX_FUEL*100)), true);
-            }
-
             // Check for situations without jetpack
             if (player.getAbilities().creativeMode || player.interactionManager.getGameMode() == GameMode.SPECTATOR){
                 continue;

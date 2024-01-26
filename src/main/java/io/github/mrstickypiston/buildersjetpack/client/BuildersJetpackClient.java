@@ -8,5 +8,6 @@ public class BuildersJetpackClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ClientTick.registerCallback();
+        Hud.registerCallback();
     }
 }

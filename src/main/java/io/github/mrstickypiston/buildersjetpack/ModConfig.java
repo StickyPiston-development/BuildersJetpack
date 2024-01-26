@@ -6,6 +6,13 @@ import dev.toma.configuration.config.Configurable;
 @Config(id = BuildersJetpack.MOD_ID)
 public class ModConfig {
 
+    public enum fuelHudType {
+        NONE,
+        BAR,
+        PERCENTAGE,
+        NUMBER
+    }
+
     // Client
     @Configurable
     @Configurable.Comment("The particle that will be displayed under the player while flying")
@@ -14,6 +21,34 @@ public class ModConfig {
     @Configurable
     @Configurable.Comment("The sound that will be played when the player uses the jetpack fuel item")
     public String FUEL_ITEM_SUCCESS = "minecraft:item.bucket.fill_lava";
+
+    @Configurable
+    @Configurable.Comment("Hide the fuel hud if chat is open to avoid overlapping")
+    public boolean FUEL_HUD_CHAT_FIX = true;
+
+    @Configurable
+    @Configurable.Comment("X location of the fuel hud")
+    public float FUEL_HUD_X = 10;
+
+    @Configurable
+    @Configurable.Comment("Y location of the fuel hud")
+    public float FUEL_HUD_Y = 10;
+
+    @Configurable
+    @Configurable.Comment("How the amount of fuel will be displayed. (NONE, BAR, PERCENTAGE, NUMBER)")
+    public fuelHudType FUEL_HUD_TYPE = fuelHudType.BAR;
+
+    @Configurable
+    @Configurable.Comment("Fuel icon used for the fuel bar")
+    public String FUEL_BAR_ICON = "▊";
+
+    @Configurable
+    @Configurable.Comment("Color code for the remaining fuel in the fuel bar")
+    public String FUEL_BAR_REMAINING_COLOR = "§f";
+
+    @Configurable
+    @Configurable.Comment("Color code for the used fuel in the fuel bar")
+    public String FUEL_BAR_USED_COLOR = "§8";
 
     // Server
     @Configurable
