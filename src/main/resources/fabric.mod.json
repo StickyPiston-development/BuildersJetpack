@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "builders-jetpack",
+  "id": "builders_jetpack",
   "version": "${version}",
   "name": "Builders Jetpack",
   "description": "The ideal jetpack mod for builders.",
@@ -18,7 +18,8 @@
     ],
     "main": [
       "io.github.mrstickypiston.buildersjetpack.BuildersJetpack"
-    ]
+    ],
+    "modmenu": ["io.github.mrstickypiston.buildersjetpack.config.ModMenuApiImpl"]
   },
   "depends": {
     "fabricloader": ">=${loader_version}",

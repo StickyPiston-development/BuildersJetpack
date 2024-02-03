@@ -2,5 +2,25 @@
   "item.builders_jetpack.jetpack": "Builders Jetpack",
   "item.builders_jetpack.jetpack_fuel": "Jetpack fuel",
 
-  "itemGroup.builders_jetpack.builders_jetpack": "Builders Jetpack"
+  "itemGroup.builders_jetpack.builders_jetpack": "Builders Jetpack",
+
+  "config.screen.builders_jetpack_common": "Builders Jetpack Common config",
+  "config.builders_jetpack_common.option.MAX_FUEL": "Maximum jetpack fuel",
+  "config.builders_jetpack_common.option.FLY_BASE_FUEL_COST": "Fly base fuel cost",
+  "config.builders_jetpack_common.option.FLY_MOVEMENT_FUEL_COST": "Fly movement fuel cost",
+  "config.builders_jetpack_common.option.FUEL_ITEM_AMOUNT": "Fuel item amount",
+  "config.builders_jetpack_common.option.FUEL_SPEED_CAP": "Fuel speed cap",
+
+  "config.screen.builders_jetpack_client": "Builders Jetpack Client config",
+  "config.builders_jetpack_client.option.PARTICLE": "Particle",
+  "config.builders_jetpack_client.option.FUEL_ITEM_SUCCESS": "Fuel item success",
+  "config.builders_jetpack_client.option.FUEL_HUD_CHAT_FIX": "Fuel hud chat fix",
+  "config.builders_jetpack_client.option.FUEL_HUD_X": "Fuel hud x",
+  "config.builders_jetpack_client.option.FUEL_HUD_Y": "Fuel hud y",
+  "config.builders_jetpack_client.option.FUEL_HUD_TYPE": "Fuel hud type",
+  "config.builders_jetpack_client.option.FUEL_BAR_ICON": "Fuel bar icon",
+  "config.builders_jetpack_client.option.FUEL_BAR_REMAINING_COLOR": "Fuel bar remaining color",
+  "config.builders_jetpack_client.option.FUEL_BAR_USED_COLOR": "Fuel bar used color",
+  "config.builders_jetpack_client.option.FUEL_WARNING": "Enable fuel warning",
+  "config.builders_jetpack_client.option.FUEL_WARNINGS": "Fuel warnings"
 }

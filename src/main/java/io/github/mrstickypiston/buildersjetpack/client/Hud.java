@@ -10,7 +10,10 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 
 public class Hud {
     public static void registerCallback(){
@@ -25,7 +28,7 @@ public class Hud {
             return;
         } if (player.isSpectator()){
             return;
-        } if (MinecraftClient.getInstance().currentScreen instanceof ChatScreen && BuildersJetpack.CONFIG.FUEL_HUD_CHAT_FIX){
+        } if (MinecraftClient.getInstance().currentScreen instanceof ChatScreen && BuildersJetpackClient.CLIENT_CONFIG.FUEL_HUD_CHAT_FIX){
             return;
         }
 
@@ -44,24 +47,31 @@ public class Hud {
 
         int height = MinecraftClient.getInstance().getWindow().getScaledHeight();
 
-        float x = BuildersJetpack.CONFIG.FUEL_HUD_X;
-        float y = height - BuildersJetpack.CONFIG.FUEL_HUD_Y;
+        float x = BuildersJetpackClient.CLIENT_CONFIG.FUEL_HUD_X;
+        float y = height - BuildersJetpackClient.CLIENT_CONFIG.FUEL_HUD_Y;
 
-        switch (BuildersJetpack.CONFIG.FUEL_HUD_TYPE){
+        switch (BuildersJetpackClient.CLIENT_CONFIG.FUEL_HUD_TYPE){
             case NONE -> {
                 return;
             }
 
             case BAR -> {
-                percentage = percentage / 10;
+                int barV = Math.round(percentage / 10);
+                MutableText bar_a;
 
-                renderer.draw(matrixStack,
-                        Text.of(String.format(
-                                "%s", BuildersJetpack.CONFIG.FUEL_BAR_REMAINING_COLOR +
-                                        BuildersJetpack.CONFIG.FUEL_BAR_ICON.repeat((int) Math.ceil(percentage)) +
-                                        BuildersJetpack.CONFIG.FUEL_BAR_USED_COLOR +
-                                        BuildersJetpack.CONFIG.FUEL_BAR_ICON.repeat((int) Math.floor(10-percentage))
-                        )),
+                if (BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_REMAINING_COLOR != Formatting.RESET) {
+                    bar_a = new LiteralText(BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_ICON.repeat(barV)).formatted(Formatting.WHITE).formatted(BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_REMAINING_COLOR);
+                } else {
+                    bar_a = new LiteralText("").formatted(Formatting.WHITE);
+                }
+
+                if (BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_USED_COLOR != Formatting.RESET) {
+                    MutableText bar_b = new LiteralText(BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_ICON.repeat(10 - barV)).formatted(BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_USED_COLOR);
+                    bar_a.append(bar_b);
+                }
+                renderer.draw(
+                        matrixStack,
+                        bar_a,
                         x, y, 0
                 );
             }

@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
 
@@ -80,19 +79,12 @@ public class ServerTick {
             distance = BuildersJetpack.CONFIG.FUEL_SPEED_CAP;
         }
 
+        nbt.putFloat("oldFuel", nbt.getFloat("fuel"));
+
         float fuel = nbt.getFloat("fuel") - BuildersJetpack.CONFIG.FLY_BASE_FUEL_COST - (float) distance/BuildersJetpack.CONFIG.FLY_MOVEMENT_FUEL_COST;
 
-        if (BuildersJetpack.CONFIG.FUEL_WARNING) {
-            for (int alert : BuildersJetpack.CONFIG.FUEL_WARNINGS) {
-                if (fuel < alert && alert <= nbt.getFloat("fuel")) {
-                    player.sendMessage(Text.of(String.format("[§c§lBuilders jetpack§r] %d fuel left (%.02f%%)", alert, alert / (float) BuildersJetpack.CONFIG.MAX_FUEL * 100)), false);
-                }
-            }
-
-            if (fuel <= 0) {
-                fuel = 0;
-                player.sendMessage(Text.of("[§c§lBuilders jetpack§r] Out of fuel"), false);
-            }
+        if (fuel <= 0) {
+            fuel = 0;
         }
 
         nbt.putFloat("fuel", fuel);

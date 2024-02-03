@@ -3,6 +3,7 @@ package io.github.mrstickypiston.buildersjetpack.items;
 import io.github.mrstickypiston.buildersjetpack.BuildersJetpack;
 import io.github.mrstickypiston.buildersjetpack.RegisterItems;
 import io.github.mrstickypiston.buildersjetpack.Utils;
+import io.github.mrstickypiston.buildersjetpack.client.BuildersJetpackClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
@@ -37,7 +38,7 @@ public class JetpackFuelItem extends Item {
                 return TypedActionResult.fail(stack);
             }
 
-            player.playSound(Utils.parseSoundEvent(BuildersJetpack.CONFIG.FUEL_ITEM_SUCCESS), 1, 1);
+            player.playSound(Utils.parseSoundEvent(BuildersJetpackClient.CLIENT_CONFIG.FUEL_ITEM_SUCCESS), 1, 1);
             return TypedActionResult.success(stack);
 
         }

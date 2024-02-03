@@ -1,10 +1,12 @@
-package io.github.mrstickypiston.buildersjetpack;
+package io.github.mrstickypiston.buildersjetpack.client.config;
 
 import dev.toma.configuration.config.Config;
 import dev.toma.configuration.config.Configurable;
+import io.github.mrstickypiston.buildersjetpack.BuildersJetpack;
+import net.minecraft.util.Formatting;
 
-@Config(id = BuildersJetpack.MOD_ID)
-public class ModConfig {
+@Config(group = BuildersJetpack.MOD_ID, id = BuildersJetpack.MOD_ID + "_client", filename = BuildersJetpack.MOD_ID + "/client")
+public class ClientConfig {
 
     public enum fuelHudType {
         NONE,
@@ -13,7 +15,6 @@ public class ModConfig {
         NUMBER
     }
 
-    // Client
     @Configurable
     @Configurable.Comment("The particle that will be displayed under the player while flying")
     public String PARTICLE = "minecraft:cloud";
@@ -36,37 +37,19 @@ public class ModConfig {
 
     @Configurable
     @Configurable.Comment("How the amount of fuel will be displayed. (NONE, BAR, PERCENTAGE, NUMBER)")
-    public fuelHudType FUEL_HUD_TYPE = fuelHudType.BAR;
+    public io.github.mrstickypiston.buildersjetpack.client.config.ClientConfig.fuelHudType FUEL_HUD_TYPE = io.github.mrstickypiston.buildersjetpack.client.config.ClientConfig.fuelHudType.BAR;
 
     @Configurable
     @Configurable.Comment("Fuel icon used for the fuel bar")
     public String FUEL_BAR_ICON = "▊";
 
     @Configurable
-    @Configurable.Comment("Color code for the remaining fuel in the fuel bar")
-    public String FUEL_BAR_REMAINING_COLOR = "§f";
+    @Configurable.Comment("Color for the remaining fuel in the fuel bar. RESET = no icon")
+    public Formatting FUEL_BAR_REMAINING_COLOR = Formatting.WHITE;
 
     @Configurable
-    @Configurable.Comment("Color code for the used fuel in the fuel bar")
-    public String FUEL_BAR_USED_COLOR = "§8";
-
-    // Server
-    @Configurable
-    @Configurable.Comment("The maximum amount of fuel a jetpack can have")
-    @Configurable.Range(min=0)
-    public int MAX_FUEL = 1000;
-
-    @Configurable
-    @Configurable.Comment("The base fuel cost per tick while flying")
-    @Configurable.DecimalRange(min=0)
-    @Configurable.Gui.NumberFormat("0.000#")
-    public float FLY_BASE_FUEL_COST = 0.002F;
-
-    @Configurable
-    @Configurable.Comment("The cost per speed of flying with formula SPEED/COST")
-    @Configurable.DecimalRange(min=0.00001)
-    @Configurable.Gui.NumberFormat("0.000#")
-    public float FLY_MOVEMENT_FUEL_COST = 40F;
+    @Configurable.Comment("Color for the used fuel in the fuel bar. RESET = no icon")
+    public Formatting FUEL_BAR_USED_COLOR = Formatting.GRAY;
 
     @Configurable
     @Configurable.Comment("Show warnings in chat when fuel reaches a certain amount")
@@ -76,14 +59,4 @@ public class ModConfig {
     @Configurable.Comment("The milestones a warning is sent if fuel warning is true")
     @Configurable.Range(min=0)
     public int[] FUEL_WARNINGS = {100, 50, 25, 10, 5, 4, 3, 2, 1};
-
-    @Configurable
-    @Configurable.Comment("The amount of fuel the fuel item adds to the jetpack")
-    @Configurable.Range(min=0)
-    public int FUEL_ITEM_AMOUNT = 100;
-
-    @Configurable
-    @Configurable.Comment("The amount of speed the fuel cost will be capped")
-    @Configurable.DecimalRange(min=0)
-    public float FUEL_SPEED_CAP = 1.4F;
 }
