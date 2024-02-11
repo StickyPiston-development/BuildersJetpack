@@ -51,7 +51,7 @@ public class Hud {
         float y = height - BuildersJetpackClient.CLIENT_CONFIG.FUEL_HUD_Y;
 
         switch (BuildersJetpackClient.CLIENT_CONFIG.FUEL_HUD_TYPE){
-            case NONE -> {
+            case DISABLED -> {
                 return;
             }
 

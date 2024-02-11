@@ -21,6 +21,6 @@
   "config.builders_jetpack_client.option.FUEL_BAR_ICON": "Fuel bar icon",
   "config.builders_jetpack_client.option.FUEL_BAR_REMAINING_COLOR": "Fuel bar remaining color",
   "config.builders_jetpack_client.option.FUEL_BAR_USED_COLOR": "Fuel bar used color",
-  "config.builders_jetpack_client.option.FUEL_WARNING": "Enable fuel warning",
+  "config.builders_jetpack_client.option.FUEL_WARNING_TYPE": "Fuel warning type",
   "config.builders_jetpack_client.option.FUEL_WARNINGS": "Fuel warnings"
 }

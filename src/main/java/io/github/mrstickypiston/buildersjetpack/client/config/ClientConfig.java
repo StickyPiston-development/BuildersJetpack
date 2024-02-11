@@ -9,10 +9,18 @@ import net.minecraft.util.Formatting;
 public class ClientConfig {
 
     public enum fuelHudType {
-        NONE,
+        DISABLED,
         BAR,
         PERCENTAGE,
         NUMBER
+    }
+
+    public enum fuelWarningType {
+        DISABLED,
+        // Chat is used for !disabled and !actionbar
+        @SuppressWarnings("unused")
+        CHAT,
+        ACTIONBAR
     }
 
     @Configurable
@@ -36,7 +44,7 @@ public class ClientConfig {
     public float FUEL_HUD_Y = 10;
 
     @Configurable
-    @Configurable.Comment("How the amount of fuel will be displayed. (NONE, BAR, PERCENTAGE, NUMBER)")
+    @Configurable.Comment("How the amount of fuel will be displayed. (DISABLED, BAR, PERCENTAGE, NUMBER)")
     public io.github.mrstickypiston.buildersjetpack.client.config.ClientConfig.fuelHudType FUEL_HUD_TYPE = io.github.mrstickypiston.buildersjetpack.client.config.ClientConfig.fuelHudType.BAR;
 
     @Configurable
@@ -52,8 +60,8 @@ public class ClientConfig {
     public Formatting FUEL_BAR_USED_COLOR = Formatting.GRAY;
 
     @Configurable
-    @Configurable.Comment("Show warnings in chat when fuel reaches a certain amount")
-    public boolean FUEL_WARNING = true;
+    @Configurable.Comment("Show warnings in when fuel reaches a certain amount")
+    public fuelWarningType FUEL_WARNING_TYPE = fuelWarningType.ACTIONBAR;
 
     @Configurable
     @Configurable.Comment("The milestones a warning is sent if fuel warning is true")
