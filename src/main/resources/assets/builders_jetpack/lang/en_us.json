@@ -10,6 +10,7 @@
   "config.builders_jetpack_common.option.FLY_MOVEMENT_FUEL_COST": "Fly movement fuel cost",
   "config.builders_jetpack_common.option.FUEL_ITEM_AMOUNT": "Fuel item amount",
   "config.builders_jetpack_common.option.FUEL_SPEED_CAP": "Fuel speed cap",
+  "config.builders_jetpack_common.option.JETPACK_FIRE_PROOF": "Fireproof jetpack",
 
   "config.screen.builders_jetpack_client": "Builders Jetpack Client config",
   "config.builders_jetpack_client.option.PARTICLE": "Particle",

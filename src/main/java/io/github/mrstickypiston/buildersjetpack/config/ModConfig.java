@@ -37,4 +37,9 @@ public class ModConfig {
     @Configurable.Synchronized
     @Configurable.DecimalRange(min=0)
     public float FUEL_SPEED_CAP = 1.4F;
+
+    @Configurable
+    @Configurable.Comment("Make the jetpack and jetpack fuel immune to fire (Requires restart)")
+    @Configurable.Synchronized
+    public boolean JETPACK_FIRE_PROOF = true;
 }

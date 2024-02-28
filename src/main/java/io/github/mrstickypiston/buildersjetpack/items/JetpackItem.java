@@ -16,7 +16,7 @@ public class JetpackItem extends ArmorItem {
     float fuel;
 
     public JetpackItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
-        super(material, slot, settings);
+        super(material, slot, BuildersJetpack.CONFIG.JETPACK_FIRE_PROOF ? settings.fireproof() : settings);
     }
 
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
@@ -24,5 +24,10 @@ public class JetpackItem extends ArmorItem {
 
         tooltip.add(Text.of("Allows you to fly consuming fuel"));
         tooltip.add(Text.of(String.format("Fuel:  %.02f/%d (%.02f%%)", fuel, BuildersJetpack.CONFIG.MAX_FUEL, fuel / BuildersJetpack.CONFIG.MAX_FUEL * 100)));
+    }
+
+    @Override
+    public boolean isEnchantable(ItemStack stack){
+        return true;
     }
 }

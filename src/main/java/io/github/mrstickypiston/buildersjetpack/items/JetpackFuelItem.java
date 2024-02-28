@@ -20,7 +20,7 @@ import java.util.List;
 public class JetpackFuelItem extends Item {
 
     public JetpackFuelItem(Settings settings) {
-        super(settings);
+        super(BuildersJetpack.CONFIG.JETPACK_FIRE_PROOF ? settings.fireproof() : settings);
     }
 
     @Override
