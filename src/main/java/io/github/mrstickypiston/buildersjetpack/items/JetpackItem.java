@@ -2,7 +2,6 @@ package io.github.mrstickypiston.buildersjetpack.items;
 
 import io.github.mrstickypiston.buildersjetpack.BuildersJetpack;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
@@ -15,8 +14,8 @@ import java.util.List;
 public class JetpackItem extends ArmorItem {
     float fuel;
 
-    public JetpackItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
-        super(material, slot, BuildersJetpack.CONFIG.JETPACK_FIRE_PROOF ? settings.fireproof() : settings);
+    public JetpackItem(ArmorMaterial material, ArmorItem.Type type, Settings settings) {
+        super(material, type, BuildersJetpack.CONFIG.JETPACK_FIRE_PROOF ? settings.fireproof() : settings);
     }
 
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {

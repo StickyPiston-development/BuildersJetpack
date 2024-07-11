@@ -1,19 +1,20 @@
 package io.github.mrstickypiston.buildersjetpack.armor.materials;
 
-import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 
 public class JetpackArmorMaterial implements ArmorMaterial {
+
     @Override
-    public int getDurability(EquipmentSlot slot) {
+    public int getDurability(ArmorItem.Type type) {
         return -1;
     }
 
     @Override
-    public int getProtectionAmount(EquipmentSlot slot) {
+    public int getProtection(ArmorItem.Type type) {
         return 8;
     }
 

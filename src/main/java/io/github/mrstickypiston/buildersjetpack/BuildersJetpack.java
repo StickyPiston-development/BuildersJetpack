@@ -6,16 +6,19 @@ import dev.toma.configuration.config.format.ConfigFormats;
 import io.github.mrstickypiston.buildersjetpack.config.ModConfig;
 import io.github.mrstickypiston.buildersjetpack.eventhandlers.ServerTick;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.metadata.Person;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
+import net.minecraft.text.Text;
 
 import java.util.Collection;
 import java.util.StringJoiner;
+
+import static io.github.mrstickypiston.buildersjetpack.RegisterItems.JETPACK_CHESTPLATE;
+import static io.github.mrstickypiston.buildersjetpack.RegisterItems.JETPACK_FUEL;
 
 public class BuildersJetpack implements ModInitializer {
     public static final String MOD_ID = "builders_jetpack";
@@ -25,9 +28,13 @@ public class BuildersJetpack implements ModInitializer {
     public static ModContainer MOD_CONTAINER;
     public static String AUTHORS;
     public static String VERSION;
-    public static final ItemGroup BUILDERS_JETPACK_GROUP = FabricItemGroupBuilder.create(
-                    new Identifier("builders_jetpack", "builders_jetpack"))
-            .icon(() -> new ItemStack(RegisterItems.JETPACK_CHESTPLATE))
+    public static final ItemGroup BUILDERS_JETPACK_GROUP = FabricItemGroup.builder()
+            .icon(() -> new ItemStack(JETPACK_CHESTPLATE))
+            .displayName(Text.translatable("itemGroup.builders_jetpack.builders_jetpack"))
+            .entries(((displayContext, entries) -> {
+                entries.add(JETPACK_CHESTPLATE);
+                entries.add(JETPACK_FUEL);
+            }))
             .build();
 
     @Override

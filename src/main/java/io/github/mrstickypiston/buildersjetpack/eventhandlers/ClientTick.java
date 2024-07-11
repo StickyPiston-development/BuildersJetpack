@@ -25,7 +25,7 @@ public class ClientTick {
             }
 
             if (player.getAbilities().flying && player.getEquippedStack(EquipmentSlot.CHEST).getItem().equals(RegisterItems.JETPACK_CHESTPLATE)){
-                player.world.addParticle(Utils.parseParticle(BuildersJetpackClient.CLIENT_CONFIG.PARTICLE), player.getX(), player.getY() -0.2, player.getZ(), 0, -0.05, 0);
+                player.getWorld().addParticle(Utils.parseParticle(BuildersJetpackClient.CLIENT_CONFIG.PARTICLE), player.getX(), player.getY() -0.2, player.getZ(), 0, -0.05, 0);
             }
 
             NbtCompound nbt = player.getEquippedStack(EquipmentSlot.CHEST).getOrCreateNbt();
