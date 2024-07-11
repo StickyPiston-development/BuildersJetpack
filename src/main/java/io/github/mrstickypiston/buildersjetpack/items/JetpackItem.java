@@ -1,10 +1,13 @@
 package io.github.mrstickypiston.buildersjetpack.items;
 
 import io.github.mrstickypiston.buildersjetpack.BuildersJetpack;
-import net.minecraft.client.item.TooltipContext;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -14,14 +17,23 @@ import java.util.List;
 public class JetpackItem extends ArmorItem {
     float fuel;
 
-    public JetpackItem(ArmorMaterial material, ArmorItem.Type type, Settings settings) {
+    public JetpackItem(RegistryEntry<ArmorMaterial> material, ArmorItem.Type type, net.minecraft.item.Item.Settings settings) {
         super(material, type, BuildersJetpack.CONFIG.JETPACK_FIRE_PROOF ? settings.fireproof() : settings);
     }
 
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        fuel = stack.getOrCreateNbt().getFloat("fuel");
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, net.minecraft.item.Item.TooltipContext context) {
+        NbtComponent component = stack.get(DataComponentTypes.CUSTOM_DATA);
 
-        tooltip.add(Text.of("Allows you to fly consuming fuel"));
+        tooltip.add(Text.of("Allows you to fly, consuming fuel"));
+
+        if (component == null){
+            tooltip.add(Text.of("Fuel:  Empty"));
+            return;
+        }
+
+        NbtCompound data = component.copyNbt();
+        fuel = data.getFloat("fuel");
+
         tooltip.add(Text.of(String.format("Fuel:  %.02f/%d (%.02f%%)", fuel, BuildersJetpack.CONFIG.MAX_FUEL, fuel / BuildersJetpack.CONFIG.MAX_FUEL * 100)));
     }
 
