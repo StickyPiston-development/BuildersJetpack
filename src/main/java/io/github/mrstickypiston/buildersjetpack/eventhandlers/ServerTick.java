@@ -86,7 +86,7 @@ public class ServerTick {
             distance = BuildersJetpack.CONFIG.FUEL_SPEED_CAP;
         }
 
-        nbt.putFloat("oldFuel", nbt.getFloat("fuel"));
+        float oldFuel = nbt.getFloat("fuel");
 
         float fuel = nbt.getFloat("fuel") - BuildersJetpack.CONFIG.FLY_BASE_FUEL_COST - (float) distance/BuildersJetpack.CONFIG.FLY_MOVEMENT_FUEL_COST;
 
@@ -94,7 +94,12 @@ public class ServerTick {
             fuel = 0;
         }
 
-        nbt.putFloat("fuel", fuel);
+        float finalFuel = fuel;
+
+        stack.apply(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT, comp -> comp.apply(currentNbt -> {
+            currentNbt.putFloat("fuel", finalFuel);
+            currentNbt.putFloat("oldFuel", oldFuel);
+        }));
     }
 
     public static float getFuel(ItemStack stack){

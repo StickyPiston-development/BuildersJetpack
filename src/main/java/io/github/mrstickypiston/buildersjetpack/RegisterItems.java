@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 import static io.github.mrstickypiston.buildersjetpack.BuildersJetpack.BUILDERS_JETPACK_GROUP;
 
 public class RegisterItems {
-    public static final Item JETPACK_CHESTPLATE = new JetpackItem(ArmorMaterials.JETPACK, ArmorItem.Type.CHESTPLATE, new Item.Settings());
+    public static final Item JETPACK_CHESTPLATE = new JetpackItem(ArmorMaterials.JETPACK, ArmorItem.Type.CHESTPLATE, new Item.Settings().maxCount(1));
     public static final Item JETPACK_FUEL = new JetpackFuelItem(new Item.Settings());
 
     public static void register() {

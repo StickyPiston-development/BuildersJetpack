@@ -15,8 +15,8 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
+import net.minecraft.text.*;
+import net.minecraft.util.Colors;
 import net.minecraft.util.Formatting;
 
 public class Hud {
@@ -72,13 +72,21 @@ public class Hud {
                 MutableText bar_a;
 
                 if (BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_REMAINING_COLOR != Formatting.RESET) {
-                    bar_a = Text.literal(BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_ICON.repeat(barV).formatted(Formatting.WHITE).formatted(BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_REMAINING_COLOR));
+                   bar_a = MutableText.of(
+                           new PlainTextContent.Literal(BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_ICON.repeat(barV))
+                   ).formatted(
+                           Formatting.WHITE
+                   ).formatted(
+                           BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_REMAINING_COLOR
+                   );
                 } else {
                     bar_a = Text.literal("").formatted(Formatting.WHITE);
                 }
 
                 if (BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_USED_COLOR != Formatting.RESET) {
-                    MutableText bar_b = Text.literal(BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_ICON.repeat(10 - barV)).formatted(BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_USED_COLOR);
+                    MutableText bar_b = Text.literal(
+                            BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_ICON.repeat(10 - barV)
+                    ).formatted(BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_USED_COLOR);
                     bar_a.append(bar_b);
                 }
                 drawContext.drawText(renderer, bar_a.asOrderedText(), (int) x, (int) y, 0, false);
