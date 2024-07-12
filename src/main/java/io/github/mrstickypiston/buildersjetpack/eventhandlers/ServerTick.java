@@ -3,6 +3,9 @@ package io.github.mrstickypiston.buildersjetpack.eventhandlers;
 import io.github.mrstickypiston.buildersjetpack.BuildersJetpack;
 import io.github.mrstickypiston.buildersjetpack.RegisterItems;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.component.Component;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -62,7 +65,11 @@ public class ServerTick {
     }
 
     public static void flyTick(PlayerEntity player){
-        NbtCompound nbt = player.getEquippedStack(EquipmentSlot.CHEST).getOrCreateNbt();
+        ItemStack stack = player.getEquippedStack(EquipmentSlot.CHEST);
+
+        NbtComponent component = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT);
+
+        NbtCompound nbt = component.copyNbt();
 
         Vec3d currentPosition = player.getPos();
         Vec3d oldPosition = movementMap.getOrDefault(player.getUuid(), player.getPos());
@@ -90,7 +97,15 @@ public class ServerTick {
         nbt.putFloat("fuel", fuel);
     }
 
-    public static float getFuel(ItemStack jetpack){
-        return jetpack.getOrCreateNbt().getFloat("fuel");
+    public static float getFuel(ItemStack stack){
+        float fuel = 0;
+
+        NbtComponent component = stack.get(DataComponentTypes.CUSTOM_DATA);
+
+        if (component != null){
+            NbtCompound data = component.copyNbt();
+            fuel = data.getFloat("fuel");
+        }
+        return fuel;
     }
 }

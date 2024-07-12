@@ -10,6 +10,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
@@ -32,12 +33,14 @@ public class JetpackFuelItem extends Item {
         ItemStack stack = player.getStackInHand(hand);
         float fuel = 0;
 
-        NbtComponent component = stack.get(DataComponentTypes.CUSTOM_DATA);
+        NbtComponent component = chestplate.get(DataComponentTypes.CUSTOM_DATA);
 
         if (component != null){
             NbtCompound data = component.copyNbt();
             fuel = data.getFloat("fuel");
         }
+
+        System.out.println(fuel);
 
         if (world.isClient()){
             if (chestplate.getItem() != RegisterItems.JETPACK_CHESTPLATE){
@@ -75,7 +78,8 @@ public class JetpackFuelItem extends Item {
         return TypedActionResult.success(stack);
     }
 
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, net.minecraft.item.Item.TooltipContext context) {
+    @Override
+    public void appendTooltip(ItemStack itemStack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         tooltip.add(Text.of(String.format("Adds %d fuel to the equipped jetpack", BuildersJetpack.CONFIG.FUEL_ITEM_AMOUNT)));
     }
 }

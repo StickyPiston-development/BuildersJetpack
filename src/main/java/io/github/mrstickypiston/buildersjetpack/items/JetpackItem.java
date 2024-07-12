@@ -6,6 +6,7 @@ import net.minecraft.component.type.NbtComponent;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
@@ -21,7 +22,7 @@ public class JetpackItem extends ArmorItem {
         super(material, type, BuildersJetpack.CONFIG.JETPACK_FIRE_PROOF ? settings.fireproof() : settings);
     }
 
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, net.minecraft.item.Item.TooltipContext context) {
+    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         NbtComponent component = stack.get(DataComponentTypes.CUSTOM_DATA);
 
         tooltip.add(Text.of("Allows you to fly, consuming fuel"));

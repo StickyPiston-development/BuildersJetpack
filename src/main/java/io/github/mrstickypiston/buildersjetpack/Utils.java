@@ -7,11 +7,11 @@ import net.minecraft.util.Identifier;
 
 public class Utils {
     public static ParticleEffect parseParticle(String s){
-        return (ParticleEffect) Registries.PARTICLE_TYPE.get(new Identifier(s));
+        return (ParticleEffect) Registries.PARTICLE_TYPE.get(Identifier.of(s));
     }
 
     public static SoundEvent parseSoundEvent(String soundString) {
-        Identifier soundId = new Identifier(soundString);
+        Identifier soundId = Identifier.of(soundString);
         return Registries.SOUND_EVENT.get(soundId);
     }
 }
