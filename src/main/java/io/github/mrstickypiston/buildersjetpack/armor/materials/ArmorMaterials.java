@@ -1,7 +1,6 @@
 package io.github.mrstickypiston.buildersjetpack.armor.materials;
 
 import io.github.mrstickypiston.buildersjetpack.BuildersJetpack;
-import io.github.mrstickypiston.buildersjetpack.RegisterItems;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Items;

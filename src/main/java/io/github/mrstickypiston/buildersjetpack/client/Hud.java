@@ -1,6 +1,5 @@
 package io.github.mrstickypiston.buildersjetpack.client;
 
-import com.mojang.brigadier.LiteralMessage;
 import io.github.mrstickypiston.buildersjetpack.BuildersJetpack;
 import io.github.mrstickypiston.buildersjetpack.RegisterItems;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
@@ -15,8 +14,9 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.text.*;
-import net.minecraft.util.Colors;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.PlainTextContent;
+import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
 public class Hud {

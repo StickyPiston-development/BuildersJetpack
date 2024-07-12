@@ -3,7 +3,6 @@ package io.github.mrstickypiston.buildersjetpack.eventhandlers;
 import io.github.mrstickypiston.buildersjetpack.BuildersJetpack;
 import io.github.mrstickypiston.buildersjetpack.RegisterItems;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.minecraft.component.Component;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.EquipmentSlot;
