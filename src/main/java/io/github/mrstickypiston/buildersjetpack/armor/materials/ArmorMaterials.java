@@ -23,24 +23,17 @@ public class ArmorMaterials {
             Map.of(
                     ArmorItem.Type.CHESTPLATE, 8
             ),
-            // Enchantability. For reference, leather has 15, iron has 9, and diamond has 10.
             15,
-            // The sound played when the armor is equipped.
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE,
-            // The ingredient(s) used to repair the armor.
             () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
-            0.0F,
-            0.0F,
-            // Guidite is NOT dyeable, so we will pass false.
-            false);
+            3.0F,
+            1.0F,
+            false
+    );
 
     public static RegistryEntry<ArmorMaterial> registerMaterial(String id, Map<ArmorItem.Type, Integer> defensePoints, int enchantability, RegistryEntry<SoundEvent> equipSound, Supplier<Ingredient> repairIngredientSupplier, float toughness, float knockbackResistance, boolean dyeable) {
         // Get the supported layers for the armor material
         List<ArmorMaterial.Layer> layers = List.of(
-                // The ID of the texture layer, the suffix, and whether the layer is dyeable.
-                // We can just pass the armor material ID as the texture layer ID.
-                // We have no need for a suffix, so we'll pass an empty string.
-                // We'll pass the dyeable boolean we received as the dyeable parameter.
                 new ArmorMaterial.Layer(Identifier.of(BuildersJetpack.MOD_ID, id), "", dyeable)
         );
 
