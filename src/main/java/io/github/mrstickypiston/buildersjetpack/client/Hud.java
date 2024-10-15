@@ -5,13 +5,17 @@ import io.github.mrstickypiston.buildersjetpack.RegisterItems;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ChatScreen;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.render.RenderTickCounter;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.LiteralText;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.MutableText;
+import net.minecraft.text.PlainTextContent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
@@ -20,7 +24,7 @@ public class Hud {
         HudRenderCallback.EVENT.register(Hud::renderHud);
     }
 
-    private static void renderHud(MatrixStack matrixStack, float v) {
+    private static void renderHud(DrawContext drawContext, RenderTickCounter renderTickCounter) {
         TextRenderer renderer = MinecraftClient.getInstance().textRenderer;
         PlayerEntity player = MinecraftClient.getInstance().player;
 
@@ -38,7 +42,15 @@ public class Hud {
             return;
         }
 
-        float fuel = chestplate.getOrCreateNbt().getFloat("fuel");
+        float fuel = 0;
+
+        NbtComponent component = chestplate.get(DataComponentTypes.CUSTOM_DATA);
+
+        if (component != null){
+            NbtCompound data = component.copyNbt();
+            fuel = data.getFloat("fuel");
+        }
+
         float percentage = fuel/(float) BuildersJetpack.CONFIG.MAX_FUEL*100;
 
         if (percentage > 100){
@@ -60,38 +72,37 @@ public class Hud {
                 MutableText bar_a;
 
                 if (BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_REMAINING_COLOR != Formatting.RESET) {
-                    bar_a = new LiteralText(BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_ICON.repeat(barV)).formatted(Formatting.WHITE).formatted(BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_REMAINING_COLOR);
+                    bar_a = MutableText.of(
+                            new PlainTextContent.Literal(BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_ICON.repeat(barV))
+                    ).formatted(
+                            Formatting.WHITE
+                    ).formatted(
+                            BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_REMAINING_COLOR
+                    );
                 } else {
-                    bar_a = new LiteralText("").formatted(Formatting.WHITE);
+                    bar_a = Text.literal("").formatted(Formatting.WHITE);
                 }
 
                 if (BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_USED_COLOR != Formatting.RESET) {
-                    MutableText bar_b = new LiteralText(BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_ICON.repeat(10 - barV)).formatted(BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_USED_COLOR);
+                    MutableText bar_b = Text.literal(
+                            BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_ICON.repeat(10 - barV)
+                    ).formatted(BuildersJetpackClient.CLIENT_CONFIG.FUEL_BAR_USED_COLOR);
                     bar_a.append(bar_b);
                 }
-                renderer.draw(
-                        matrixStack,
-                        bar_a,
-                        x, y, 0
-                );
+                drawContext.drawText(renderer, bar_a.asOrderedText(), (int) x, (int) y, 0, false);
             }
-            case PERCENTAGE -> renderer.draw(matrixStack,
+            case PERCENTAGE -> drawContext.drawText(
+                    renderer,
                     Text.of(String.format(
                             "§f%.2f%%", percentage
-                    )),
-                    x, y, 0
-            );
-            case NUMBER -> renderer.draw(matrixStack,
+                    )), (int) x, (int) y, 0, false);
+            case NUMBER -> drawContext.drawText(
+                    renderer,
                     Text.of(String.format(
                             "§f%.2f/%d", fuel, BuildersJetpack.CONFIG.MAX_FUEL
-                    )),
-                    x, y, 0
-            );
+                    )), (int) x, (int) y, 0, false);
         }
 
-        renderer.draw(matrixStack,
-                Text.of("§fJetpack fuel:"),
-                x, y-10, 0
-        );
+        drawContext.drawText(renderer, Text.of("§fJetpack fuel:"), (int) x, (int) y - 10, 0, false);
     }
 }

@@ -6,7 +6,7 @@ import dev.toma.configuration.config.format.ConfigFormats;
 import io.github.mrstickypiston.buildersjetpack.config.ModConfig;
 import io.github.mrstickypiston.buildersjetpack.eventhandlers.ServerTick;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.metadata.Person;
@@ -25,10 +25,6 @@ public class BuildersJetpack implements ModInitializer {
     public static ModContainer MOD_CONTAINER;
     public static String AUTHORS;
     public static String VERSION;
-    public static final ItemGroup BUILDERS_JETPACK_GROUP = FabricItemGroupBuilder.create(
-                    new Identifier("builders_jetpack", "builders_jetpack"))
-            .icon(() -> new ItemStack(RegisterItems.JETPACK_CHESTPLATE))
-            .build();
 
     @Override
     public void onInitialize() {

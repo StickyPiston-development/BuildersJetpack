@@ -1,11 +1,11 @@
 package io.github.mrstickypiston.buildersjetpack.items;
 
 import io.github.mrstickypiston.buildersjetpack.BuildersJetpack;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -19,7 +19,7 @@ public class JetpackItem extends ArmorItem {
         super(material, slot, BuildersJetpack.CONFIG.JETPACK_FIRE_PROOF ? settings.fireproof() : settings);
     }
 
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipType context) {
         fuel = stack.getOrCreateNbt().getFloat("fuel");
 
         tooltip.add(Text.of("Allows you to fly consuming fuel"));
