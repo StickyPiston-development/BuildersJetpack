@@ -6,13 +6,9 @@ import dev.toma.configuration.config.format.ConfigFormats;
 import io.github.mrstickypiston.buildersjetpack.config.ModConfig;
 import io.github.mrstickypiston.buildersjetpack.eventhandlers.ServerTick;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.metadata.Person;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
 
 import java.util.Collection;
 import java.util.StringJoiner;

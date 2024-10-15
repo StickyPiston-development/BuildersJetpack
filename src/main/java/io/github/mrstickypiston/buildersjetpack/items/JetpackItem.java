@@ -1,11 +1,14 @@
 package io.github.mrstickypiston.buildersjetpack.items;
 
 import io.github.mrstickypiston.buildersjetpack.BuildersJetpack;
+import net.fabricmc.fabric.api.item.v1.EnchantingContext;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.NbtComponent;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -39,5 +42,11 @@ public class JetpackItem extends ArmorItem {
     @Override
     public boolean isEnchantable(ItemStack stack){
         return true;
+    }
+
+    @Override
+    public boolean canBeEnchantedWith(ItemStack stack, RegistryEntry<Enchantment> enchantment, EnchantingContext context) {
+
+        return enchantment.value().isAcceptableItem(Items.NETHERITE_CHESTPLATE.getDefaultStack()) && enchantment.value().isSupportedItem(Items.NETHERITE_CHESTPLATE.getDefaultStack());
     }
 }
