@@ -13,7 +13,7 @@ public class BuildersJetpackClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        CLIENT_CONFIG_BASE = Configuration.registerConfig(ClientConfig.class, ConfigFormats.yaml());
+        CLIENT_CONFIG_BASE = Configuration.registerConfig(ClientConfig.class, ConfigFormats.YAML);
         CLIENT_CONFIG = CLIENT_CONFIG_BASE.getConfigInstance();
 
         ClientTick.registerCallback();

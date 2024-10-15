@@ -12,7 +12,7 @@ public class BuildersJetpackCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher){
         final LiteralCommandNode<ServerCommandSource> buildersJetpackNode = dispatcher.register(literal("builders_jetpack")
                 .executes(context -> {
-                    context.getSource().sendFeedback(Text.of(String.format("[§c§lBuilders jetpack§r] version %s made by %s", BuildersJetpack.VERSION, BuildersJetpack.AUTHORS)), false);
+                    context.getSource().sendFeedback(() -> Text.of(String.format("[§c§lBuilders jetpack§r] version %s made by %s", BuildersJetpack.VERSION, BuildersJetpack.AUTHORS)), false);
                     return 0;
                 })
         );

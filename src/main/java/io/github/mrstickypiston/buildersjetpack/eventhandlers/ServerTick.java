@@ -3,6 +3,9 @@ package io.github.mrstickypiston.buildersjetpack.eventhandlers;
 import io.github.mrstickypiston.buildersjetpack.BuildersJetpack;
 import io.github.mrstickypiston.buildersjetpack.RegisterItems;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.component.Component;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -62,7 +65,11 @@ public class ServerTick {
     }
 
     public static void flyTick(PlayerEntity player){
-        NbtCompound nbt = player.getEquippedStack(EquipmentSlot.CHEST).getOrCreateNbt();
+        ItemStack stack = player.getEquippedStack(EquipmentSlot.CHEST);
+
+        NbtComponent component = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT);
+
+        NbtCompound nbt = component.copyNbt();
 
         Vec3d currentPosition = player.getPos();
         Vec3d oldPosition = movementMap.getOrDefault(player.getUuid(), player.getPos());
@@ -79,7 +86,7 @@ public class ServerTick {
             distance = BuildersJetpack.CONFIG.FUEL_SPEED_CAP;
         }
 
-        nbt.putFloat("oldFuel", nbt.getFloat("fuel"));
+        float oldFuel = nbt.getFloat("fuel");
 
         float fuel = nbt.getFloat("fuel") - BuildersJetpack.CONFIG.FLY_BASE_FUEL_COST - (float) distance/BuildersJetpack.CONFIG.FLY_MOVEMENT_FUEL_COST;
 
@@ -87,10 +94,23 @@ public class ServerTick {
             fuel = 0;
         }
 
-        nbt.putFloat("fuel", fuel);
+        float finalFuel = fuel;
+
+        stack.apply(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT, comp -> comp.apply(currentNbt -> {
+            currentNbt.putFloat("fuel", finalFuel);
+            currentNbt.putFloat("oldFuel", oldFuel);
+        }));
     }
 
-    public static float getFuel(ItemStack jetpack){
-        return jetpack.getOrCreateNbt().getFloat("fuel");
+    public static float getFuel(ItemStack stack){
+        float fuel = 0;
+
+        NbtComponent component = stack.get(DataComponentTypes.CUSTOM_DATA);
+
+        if (component != null){
+            NbtCompound data = component.copyNbt();
+            fuel = data.getFloat("fuel");
+        }
+        return fuel;
     }
 }

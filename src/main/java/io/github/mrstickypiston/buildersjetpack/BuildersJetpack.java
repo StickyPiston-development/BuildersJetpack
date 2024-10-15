@@ -30,7 +30,7 @@ public class BuildersJetpack implements ModInitializer {
     public void onInitialize() {
         FabricLoader fabricLoader = FabricLoader.getInstance();
 
-        CONFIG_BASE = Configuration.registerConfig(ModConfig.class, ConfigFormats.yaml());
+        CONFIG_BASE = Configuration.registerConfig(ModConfig.class, ConfigFormats.YAML);
         CONFIG = CONFIG_BASE.getConfigInstance();
 
         MOD_CONTAINER = fabricLoader.getModContainer(MOD_ID).orElse(null);

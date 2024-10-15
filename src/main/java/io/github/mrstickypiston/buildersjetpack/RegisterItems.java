@@ -4,25 +4,23 @@ import io.github.mrstickypiston.buildersjetpack.items.JetpackFuelItem;
 import io.github.mrstickypiston.buildersjetpack.items.JetpackItem;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.*;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 
 public class RegisterItems {
     public static final Item JETPACK_CHESTPLATE = new JetpackItem(
-            ArmorMaterials.JETPACK.value(),
-            EquipmentSlot.CHEST,
+            ArmorMaterials.JETPACK,
+            ArmorItem.Type.CHESTPLATE,
             new Item.Settings()
     );
     public static final Item JETPACK_FUEL = new JetpackFuelItem(new Item.Settings());
 
-    public static final RegistryKey<ItemGroup> BUILDERS_JETPACK_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Identifier.of(FabricDocsReference.MOD_ID, "item_group"));
+    public static final RegistryKey<ItemGroup> BUILDERS_JETPACK_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Identifier.of(BuildersJetpack.MOD_ID, "builders_jetpack"));
     public static final ItemGroup BUILDERS_JETPACK_GROUP = FabricItemGroup.builder()
             .icon(() -> new ItemStack(JETPACK_CHESTPLATE.asItem()))
             .displayName(Text.translatable("itemGroup.builders_jetpack.builders_jetpack"))

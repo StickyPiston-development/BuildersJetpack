@@ -7,8 +7,11 @@ import io.github.mrstickypiston.buildersjetpack.client.BuildersJetpackClient;
 import io.github.mrstickypiston.buildersjetpack.client.config.ClientConfig;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 
@@ -25,15 +28,21 @@ public class ClientTick {
             }
 
             if (player.getAbilities().flying && player.getEquippedStack(EquipmentSlot.CHEST).getItem().equals(RegisterItems.JETPACK_CHESTPLATE)){
-                player.getEntityWorld().addParticle(Utils.parseParticle(BuildersJetpackClient.CLIENT_CONFIG.PARTICLE), player.getX(), player.getY() -0.2, player.getZ(), 0, -0.05, 0);
+                player.getWorld().addParticle(Utils.parseParticle(BuildersJetpackClient.CLIENT_CONFIG.PARTICLE), player.getX(), player.getY() -0.2, player.getZ(), 0, -0.05, 0);
             }
 
-            NbtCompound nbt = player.getEquippedStack(EquipmentSlot.CHEST).getOrCreateNbt();
+            ItemStack stack = player.getEquippedStack(EquipmentSlot.CHEST);
 
-            float fuel = nbt.getFloat("fuel");
-            float oldFuel = nbt.getFloat("oldFuel");
+            float fuel = 0;
+            float oldFuel = 0;
 
-            nbt.putFloat("oldFuel", 0);
+            NbtComponent component = stack.get(DataComponentTypes.CUSTOM_DATA);
+
+            if (component != null){
+                NbtCompound data = component.copyNbt();
+                fuel = data.getFloat("fuel");
+                oldFuel = data.getFloat("oldFuel");
+            }
 
             if (BuildersJetpackClient.CLIENT_CONFIG.FUEL_WARNING_TYPE != ClientConfig.fuelWarningType.DISABLED && player.getAbilities().flying && !player.isCreative()) {
                 boolean actionBar = BuildersJetpackClient.CLIENT_CONFIG.FUEL_WARNING_TYPE == ClientConfig.fuelWarningType.ACTIONBAR;

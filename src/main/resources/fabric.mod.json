@@ -18,8 +18,7 @@
     ],
     "main": [
       "io.github.mrstickypiston.buildersjetpack.BuildersJetpack"
-    ],
-    "modmenu": ["io.github.mrstickypiston.buildersjetpack.config.ModMenuApiImpl"]
+    ]
   },
   "depends": {
     "fabricloader": ">=${loader_version}",
