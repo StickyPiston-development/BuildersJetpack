@@ -20,6 +20,6 @@
     }
   },
   "result": {
-    "item": "builders_jetpack:jetpack"
+    "id": "builders_jetpack:jetpack"
   }
 }

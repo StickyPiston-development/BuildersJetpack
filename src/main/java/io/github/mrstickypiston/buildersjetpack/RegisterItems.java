@@ -5,7 +5,6 @@ import io.github.mrstickypiston.buildersjetpack.items.JetpackItem;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -16,7 +15,7 @@ public class RegisterItems {
     public static final Item JETPACK_CHESTPLATE = new JetpackItem(
             ArmorMaterials.JETPACK,
             ArmorItem.Type.CHESTPLATE,
-            new Item.Settings()
+            new Item.Settings().maxCount(1)
     );
     public static final Item JETPACK_FUEL = new JetpackFuelItem(new Item.Settings());
 

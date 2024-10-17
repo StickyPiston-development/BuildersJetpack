@@ -15,6 +15,6 @@
     }
   ],
   "result": {
-    "item": "builders_jetpack:jetpack_fuel"
+    "id": "builders_jetpack:jetpack_fuel"
   }
 }
