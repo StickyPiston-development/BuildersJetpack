@@ -24,7 +24,11 @@ public class ClientTick {
                 return;
             }
 
-            if (player.getAbilities().flying && player.getEquippedStack(EquipmentSlot.CHEST).getItem().equals(RegisterItems.JETPACK_CHESTPLATE)){
+            if (!player.getEquippedStack(EquipmentSlot.CHEST).getItem().equals(RegisterItems.JETPACK_CHESTPLATE)){
+                return;
+            }
+
+            if (player.getAbilities().flying){
                 player.getWorld().addParticle(Utils.parseParticle(BuildersJetpackClient.CLIENT_CONFIG.PARTICLE), player.getX(), player.getY() -0.2, player.getZ(), 0, -0.05, 0);
             }
 

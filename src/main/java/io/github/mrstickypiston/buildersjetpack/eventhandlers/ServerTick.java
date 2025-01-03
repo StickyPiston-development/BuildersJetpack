@@ -19,6 +19,7 @@ import java.util.UUID;
 public class ServerTick {
 
     private static final HashMap<UUID, Vec3d> movementMap = new HashMap<>();
+    private static final HashMap<UUID, Boolean> hasJetpackMap = new HashMap<>();
     public static void registerCallback() {
         ServerTickEvents.START_SERVER_TICK.register(ServerTick::onServerTick);
     }
@@ -27,21 +28,43 @@ public class ServerTick {
         List<ServerPlayerEntity> players = server.getPlayerManager().getPlayerList();
 
         for (ServerPlayerEntity player : players) {
-
-            ItemStack chestplate = player.getEquippedStack(EquipmentSlot.CHEST);
-
             // Check for situations without jetpack
             if (player.getAbilities().creativeMode || player.interactionManager.getGameMode() == GameMode.SPECTATOR){
                 continue;
             }
 
-            if (!(chestplate.getItem() == RegisterItems.JETPACK_CHESTPLATE)){
-                player.getAbilities().allowFlying = false;
-                player.getAbilities().flying = false;
-                player.sendAbilitiesUpdate();
-                continue;
-            }
+            ItemStack chestplate = player.getEquippedStack(EquipmentSlot.CHEST);
 
+            if (!hasJetpackMap.getOrDefault(player.getUuid(), false)) {
+
+                // player had no jetpack previous tick
+
+                if (chestplate.getItem() == RegisterItems.JETPACK_CHESTPLATE) {
+                    System.out.println("player got jetpack: " + player.getName());
+                    // player does have a jetpack this tick
+                    hasJetpackMap.put(player.getUuid(), true);
+                } else {
+                    // Player still has no jetpack
+                    continue;
+                }
+
+            } else {
+                // player had a jetpack last tick
+
+                if (!(chestplate.getItem() == RegisterItems.JETPACK_CHESTPLATE)){
+                    System.out.println("player no longer has jetpack: " + player.getName());
+                    // player no longer has a jetpack, disable flying
+                    player.getAbilities().allowFlying = false;
+                    player.getAbilities().flying = false;
+                    player.sendAbilitiesUpdate();
+
+                    // update map
+                    hasJetpackMap.put(player.getUuid(), false);
+                    continue;
+                }
+
+                // player still has a jetpack
+            }
 
             // Fly code
 
